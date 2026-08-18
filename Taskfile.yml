@@ -2,12 +2,37 @@
 
 version: '3'
 
-vars:
-  GREETING: Hello, world!
-
 tasks:
   default:
-    desc: Print a greeting message
+    desc: "Show menu"
     cmds:
-      - echo "{{.GREETING}}"
+      - echo "Available commands:"
+      - echo "  core:u      - up core services"
+      - echo "  core:d      - down core services"
+      - echo "  watcher:u   - up adminer retranslator port 4321"
+      - echo "  watcher:d   - down adminer retranslator"
+    silent: true
+
+  core:u:
+    desc: up core services
+    cmds:
+      - docker compose --profile core up --detach
+    silent: true
+
+  core:d:
+    desc: down core services
+    cmds:
+      - docker compose --profile core down
+    silent: true
+
+  watcher:u:
+    desc: up adminer retranslator port 4321
+    cmds:
+      - docker compose --profile watcher up --detach
+    silent: true
+  
+  watcher:d:
+    desc: down adminer retranslator
+    cmds:
+      - docker compose --profile watcher down
     silent: true
