@@ -1,0 +1,4 @@
+FROM golang:tip-alpine3.24 AS builder
+RUN apk add --no-cache git
+RUN go install github.com/pressly/goose/releases/tag/v3.27.3
+
